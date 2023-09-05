@@ -46,21 +46,6 @@ const deleteCliente = (id, institucion) => {
         }
     });
 }
-
-const save = () =>{
-    if(operation.value == 1){
-        form.post(route('clientes.store'),{
-            onSuccess: () => {ok('cliente creado')}
-        });
-    }
-    else{
-        form.put(route('clientes.update',id.value),{
-            onSuccess: () => {ok('cliente updated')}
-        });
-    }
-}
-
-
 </script>
 
 <template>
