@@ -1,2 +1,2 @@
 # maceradoras
- Crud con laravel 10
+ Crud con laravel
