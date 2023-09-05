@@ -167,7 +167,7 @@ const deleteMaceradora = (serial,modelo) =>{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="mac, i in maceradoras.data" :key="mac.id">
+                        <tr v-for="mac, i in maceradoras.data" :key="mac.serial">
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.serial }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.modelo }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.estado }}</td>
@@ -220,12 +220,12 @@ const deleteMaceradora = (serial,modelo) =>{
             </div>
 
                 <div class="p-3">
-                <label for="modelo" class="block font-medium text-gray-700">Modelo</label>
+                <label for="modelo" value="modelo" class="block font-medium text-gray-700">Modelo</label>
                 <div class="mt-1 relative rounded-md shadow-sm">
                 <select id="modelo" v-model="form.modelo" required
                     class="block form-select px-4 py-2 w-3/4 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                        <option value="Vortex">Vortex</option>
-                        <option value="Compact +">Compact +</option>
+                        <option>Vortex</option>
+                        <option>Compact +</option>
                 </select>
                 <p class="text-red-500 mt-2" v-if="form.errors.modelo">{{ form.errors.modelo }}</p>
                 </div>
@@ -316,6 +316,7 @@ const deleteMaceradora = (serial,modelo) =>{
                 placeholder="img"></TextInput>
                 <InputError :message="form.errors.img" class="mt-2"></InputError>
             </div>
+            
             <div class="p-3">
                 <InputLabel for="cliente_id" value="cliente:"></InputLabel>
                 <SelectInput id="cliente_id" :options="clientes"
@@ -323,6 +324,7 @@ const deleteMaceradora = (serial,modelo) =>{
                 ></SelectInput>
                 <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
             </div>
+
             <div class="p-3 mt-6">
                 <PrimaryButton :disabled="form.processing" @click="save">
                     <i class="fa-solid fa-save"></i> Guardar

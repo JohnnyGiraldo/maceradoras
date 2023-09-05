@@ -22,21 +22,45 @@ const formPage = useForm({});
 const onPageClick = (event)=>{
     formPage.get(route('clientes.index',{page:event}));
 }
-const deleteCliente = (id,institucion) =>{
+const deleteCliente = (id, institucion) => {
     const alerta = Swal.mixin({
-        buttonsStyling:true
+        buttonsStyling: true
     });
     alerta.fire({
-        title:'Esta seguro de Eliminar a: '+institucion+' ?',
-        icon:'question', showCancelButton:true,
-        confirmButtonText:'<i class="fa-solid fa-check"></i> Si,eliminar',
-        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancelar'
+        title: '¿Está seguro de eliminar a: ' + institucion + ' ?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa-solid fa-check"></i> Sí, eliminar',
+        cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancelar'
     }).then((result) => {
-        if(result.isConfirmed) {
-            form.delete(route('clientes.destroy',id));
+        if (result.isConfirmed) {
+            form.delete(route('clientes.destroy', id), {
+                onSuccess: () => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cliente eliminado',
+                        text: 'El cliente ha sido eliminado con éxito.'
+                    });
+                }
+            });
         }
     });
 }
+
+const save = () =>{
+    if(operation.value == 1){
+        form.post(route('clientes.store'),{
+            onSuccess: () => {ok('cliente creado')}
+        });
+    }
+    else{
+        form.put(route('clientes.update',id.value),{
+            onSuccess: () => {ok('cliente updated')}
+        });
+    }
+}
+
+
 </script>
 
 <template>

@@ -6,17 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Order;
 
-class mantenimiento-maceradoras extends Notification
+
+class MantenimientoMaceradoras extends Notification
 {
     use Queueable;
+
+    protected $order; // Declarar la propiedad $order
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -26,7 +30,7 @@ class mantenimiento-maceradoras extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -48,7 +52,10 @@ class mantenimiento-maceradoras extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'message' => 'Es hora de realizar el mantenimiento de la maceradora.',
+            'maceradora_serial' => $this->order->serial,
+            'maintenance_date' => $this->order->fechaMantenimiento,
+            'institution' => $this->order->cliente->institucion, 
         ];
     }
 }

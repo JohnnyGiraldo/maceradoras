@@ -21,6 +21,7 @@ class Maceradora extends Model
         'tipoPieza','fechaCambioPieza','numeroCiclos','fechaIncidente',
         'observaciones','img','cliente_id'
     ];
+    
 
     // Resto de las propiedades y relaciones del modelo...
 }
