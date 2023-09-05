@@ -1,2 +1,2 @@
-# maceradoras
- doble crud con laravel 10
+# Alkamedica
+ crud con laravel 10
