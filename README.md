@@ -1,2 +1,2 @@
-# Alkamedica
- crud con laravel 10
+# maceradoras
+ crud
