@@ -18,7 +18,7 @@ class MaceradoraController extends Controller
         'tipoMantenimiento','fechaMantenimiento','tipoPieza','fechaCambioPieza',
         'numeroCiclos','fechaIncidente','observaciones','img',
         'cliente_id as cliente')
-        ->join('clientes','cliente_id','=','maceradoras.cliente_id')
+        ->join('clientes','id','=','maceradoras.cliente_id')
         ->paginate(10);
 
         $clientesArray = Cliente::all();
@@ -56,6 +56,23 @@ class MaceradoraController extends Controller
         $maceradora->save();
         return redirect('maceradoras');
     }
+
+
+    public function edit(Maceradora $maceradora)
+    {
+        $clientesArray = Cliente::all();
+
+        $clientes = $clientesArray->map(function ($cliente) {
+            return [
+                'id' => $cliente->id,
+                'name' => $cliente->institucion,
+            ];
+        })->all();
+        return Inertia::render('Maceradoras/Edit',['maceradora' => $maceradora,
+        'clientes' => $clientes]);
+    }
+
+
     public function update(Request $request, $maceradora)
     {
        
@@ -66,6 +83,22 @@ class MaceradoraController extends Controller
     
         return redirect('maceradoras');
     }
+
+    public function create()
+    {
+        $clientesArray = Cliente::all();
+
+        $clientes = $clientesArray->map(function ($cliente) {
+            return [
+                'id' => $cliente->id,
+                'name' => $cliente->institucion,
+            ];
+        })->all();
+
+        return Inertia::render('Maceradoras/Create',[
+        'clientes' => $clientes]);
+    }
+
     public function destroy(Maceradora $maceradora)
     {
         $maceradora->delete();

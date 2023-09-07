@@ -43,7 +43,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/maceradoras/{maceradora}', [MaceradoraController::class, 'update'])->name('maceradoras.update');
     Route::get('/maceradoras', [MaceradoraController::class, 'index'])->name('maceradoras.index');
     Route::get('/clientes/{id}/has-maceradora', 'ClienteController@hasMaceradora');
+    
+});
+use App\Models\User;
+Route::get('/notificacion', function (){
+        $user = User::find(1);
+        $user->notify(new \App\Notifications\InvoicePaid);
 
+        return 'Notificacion Enviada';
 });
 
 require __DIR__.'/auth.php';

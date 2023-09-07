@@ -2,9 +2,12 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import SelectInput from '@/Components/SelectInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
+
+const props = defineProps({clientes: { type: Object } });
 
 const form = useForm({serial:'',
     modelo:'',
@@ -20,7 +23,7 @@ const form = useForm({serial:'',
     fechaIncidente:'',
     observaciones:'',
     img:'',
-    cliente_institucion:'',
+    cliente_id:'',
 });
 
 
@@ -130,10 +133,11 @@ const form = useForm({serial:'',
                   type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
-                  <InputLabel for="cliente_institucion" value="ID-INSTITUCION" class="text-center"></InputLabel>
-                  <TextInput id="cliente_institucion" v-model="form.cliente_institucion" required
-                  type="text" class="mt-1 block w-full"></TextInput>
-                  <InputError :message="form.errors.cliente_institucion" class="mt-2"></InputError>
+                  <InputLabel for="cliente_id" value="cliente:"></InputLabel>
+                  <SelectInput id="cliente_id" :options="clientes"
+                   v-model="form.cliente_id" type="text" class="mt-1 block w-3/4"
+                  ></SelectInput>
+                  <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
                 </div>
               </div> 
 

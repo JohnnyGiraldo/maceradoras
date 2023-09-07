@@ -3,10 +3,13 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import SelectInput from '@/Components/SelectInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
-const props = defineProps({ maceradora: { type: Object },cliente: { type: Object } });
+
+
+const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
 
 const form = useForm({
   serial: props.maceradora.serial,
@@ -23,7 +26,7 @@ const form = useForm({
   fechaIncidente: props.maceradora.fechaIncidente,
   observaciones: props.maceradora.observaciones,
   img: props.maceradora.img,
-  cliente_institucion: props.cliente_institucion
+  cliente_id: props.maceradora.cliente_id
 });
 </script>
 
@@ -38,7 +41,7 @@ const form = useForm({
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="form.patch(route('maceradoras.update',maceradora))"
+            <form @submit.prevent="form.patch(route('maceradoras.update',form.serial))"
                   class="space-y-2 max-w-xl mx-auto grid grid-cols-2 gap-4">
 
                   <!-- Columna izquierda -->
@@ -120,10 +123,10 @@ const form = useForm({
                              type="text" class="mt-1 block w-full" />
                   <InputError :message="form.errors.img" class="mt-2" />
   
-                  <InputLabel for="cliente_institucion" value="Institucion" class="text-center" />
-                  <TextInput id="cliente_institucion" v-model="form.cliente_institucion" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.cliente_institucion" class="mt-2" />
+                  <InputLabel for="cliente_id" value="cliente:"></InputLabel>
+                  <SelectInput id="cliente_id" :options="clientes" 
+                  v-model="form.cliente_id" class="mt-1 block w-3/4"></SelectInput>
+                  <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
   
                 </div>
               </div>
