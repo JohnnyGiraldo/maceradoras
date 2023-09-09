@@ -52,10 +52,15 @@ const form = useForm({serial:'',
                     type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.serial" class="mt-2"></InputError>
   
-                  <InputLabel for="modelo" value="MODELO" class="text-center"></InputLabel>
-                  <TextInput id="modelo" v-model="form.modelo" required
-                    type="text" class="mt-1 block w-full"></TextInput>
-                  <InputError :message="form.errors.modelo" class="mt-2"></InputError>
+                  <label for="modelo" value="modelo" class="block font-medium text-gray-700">Modelo</label>
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                  <select id="modelo" v-model="form.modelo" required
+                    class="block form-select px-4 py-2 w-3/4 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <option>Vortex</option>
+                        <option>Compact +</option>
+                  </select>
+                <p class="text-red-500 mt-2" v-if="form.errors.modelo">{{ form.errors.modelo }}</p>
+                </div>
   
                   <InputLabel for="estado" value="ESTADO" class="text-center"></InputLabel>
                   <TextInput id="estado" v-model="form.estado" required
@@ -133,9 +138,9 @@ const form = useForm({serial:'',
                   type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
-                  <InputLabel for="cliente_id" value="cliente:"></InputLabel>
+                  <InputLabel for="cliente_id" value="CLIENTE:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"
-                   v-model="form.cliente_id" type="text" class="mt-1 block w-3/4"
+                   v-model="form.cliente_id" type="text" class="mt-1 block w-full"
                   ></SelectInput>
                   <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
                 </div>

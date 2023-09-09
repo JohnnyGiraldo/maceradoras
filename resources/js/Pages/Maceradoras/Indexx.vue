@@ -111,7 +111,7 @@ const ok = (msj) =>{
     closeModal();
     Swal.fire({title:msj,icon:'success'});
 }
-const deleteMaceradora = (serial,modelo) =>{
+const deleteMaceradora = (serial) =>{
     const alerta = Swal.mixin({
         buttonsStyling:true
     });

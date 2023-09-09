@@ -3,11 +3,18 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
+import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 
 const props = defineProps({
     maceradoras: {type:Object},
     clientes: {type:Object}
 });
+
+const formPage = useForm({});
+const onPageClick = (event)=>{
+    formPage.get(route('maceradoras.index',{page:event}));
+
+}
 const form = useForm({
             serial:'',
             modelo:'',
@@ -25,20 +32,29 @@ const form = useForm({
             img:'',
             cliente:''           
 });
-const deleteMaceradora = (serial,modelo) =>{
-    const alerta = Swal.mixin({
-        buttonsStyling:true
-    });
-    alerta.fire({
-        title:'Esta seguro de Eliminar a: '+serial+' ?',
-        icon:'question', showCancelButton:true,
-        confirmButtonText:'<i class="fa-solid fa-check"></i> Si,eliminar',
-        cancelButtonText:'<i class="fa-solid fa-ban"></i> Cancelar'
-    }).then((result) => {
-        if(result.isConfirmed) {
-            form.delete(route('maceradoras.destroy',serial));
-        }
-    });
+const ok = (msj) => {
+  form.reset();
+  Swal.fire({ title: msj, icon: 'success' });
+}
+
+const deleteMaceradora = (serial) => {
+  const alerta = Swal.mixin({
+    buttonsStyling: true,
+  });
+
+  alerta.fire({
+    title: 'Esta seguro de Eliminar a: ' + serial + ' ?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: '<i class="fa-solid fa-check"></i> Si, eliminar',
+    cancelButtonText: '<i class="fa-solid fa-ban"></i> Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      form.delete(route('maceradoras.destroy', serial), {
+        onSuccess: () => { ok('Maceradora eliminada') }
+      });
+    }
+  });
 }
 </script>
 
@@ -63,6 +79,7 @@ const deleteMaceradora = (serial,modelo) =>{
                 <table class="table-auto border border-gray-400">
                     <thead>
                         <tr class="bg-gray-100">
+                            <th class="px-2 py-2">Institucion</th>
                             <th class="px-2 py-2">Serial</th>
                             <th class="px-2 py-2">Modelo</th>
                             <th class="px-2 py-2">Estado</th>
@@ -77,13 +94,13 @@ const deleteMaceradora = (serial,modelo) =>{
                             <th class="px-2 py-2">Fecha Incidente</th>
                             <th class="px-2 py-2">observaciones</th>
                             <th class="px-2 py-2">Imagen</th>
-                            <th class="px-2 py-2">Institucion</th>
                             <th class="px-2 py-2">Editar</th>
                             <th class="px-2 py-2">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="mac, i in maceradoras.data" :key="mac.serial">
+                        <td class="border border-gray-400 px-2 py-2">{{ mac.cliente }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.serial }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.modelo }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.estado }}</td>
@@ -98,7 +115,6 @@ const deleteMaceradora = (serial,modelo) =>{
                         <td class="border border-gray-400 px-2 py-2">{{ mac.fechaIncidente}}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.observaciones }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.img }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.cliente }}</td>
                         <td class="border border-gray-400 px-2 py-2">
 
                             <Link :href="route('maceradoras.edit',mac)"
@@ -114,6 +130,13 @@ const deleteMaceradora = (serial,modelo) =>{
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="bg-white grid v-screen place-items-center">
+                <VueTailwindPagination
+                    :current="maceradoras.currentPage" :total="maceradoras.total"
+                    :per-page="maceradoras.perPage"
+                    @page-changed="onPageClick($event)"
+                ></VueTailwindPagination>
             </div>
         </div>
     </AuthenticatedLayout>

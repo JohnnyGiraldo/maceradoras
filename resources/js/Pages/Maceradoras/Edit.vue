@@ -42,95 +42,106 @@ const form = useForm({
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
             <form @submit.prevent="form.patch(route('maceradoras.update',form.serial))"
-                  class="space-y-2 max-w-xl mx-auto grid grid-cols-2 gap-4">
+                  class="space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4">
 
-                  <!-- Columna izquierda -->
-              <div class="col-span-1">
-                <div class="flex flex-col">
-                  <InputLabel for="serial" value="Serial" class="text-center" />
-                  <TextInput id="serial" v-model="form.serial" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.serial" class="mt-2" />
+               <!-- Columna 1 -->
+               <div class="col-span-1">
+                  <div class="flex flex-col">
+                
+                  <InputLabel for="serial" value="SERIAL" class="text-center"></InputLabel>
+                  <TextInput id="serial" v-model="form.serial" required
+                    type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.serial" class="mt-2"></InputError>
   
-                  <InputLabel for="modelo" value="modelo" class="text-center" />
-                  <TextInput id="modelo" v-model="form.modelo" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.modelo" class="mt-2" />
+                  <InputLabel for="modelo" value="MODELO" class="text-center"></InputLabel>
+                  <TextInput id="modelo" v-model="form.modelo" required
+                    type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.modelo" class="mt-2"></InputError>
   
-                  <InputLabel for="estado" value="estado" class="text-center" />
-                  <TextInput id="estado" v-model="form.estado" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.estado" class="mt-2" />
-  
-                  <InputLabel for="fechaFabricacion" value="fechaFabricacion" class="text-center" />
-                  <TextInput id="fechaFabricacion" v-model="form.fechaFabricacion" autofocus required
-                             type="date" class="mt-1 block w-full align-sub" />
-                  <InputError :message="form.errors.fechaFabricacion" class="mt-2" />
+                  <InputLabel for="estado" value="ESTADO" class="text-center"></InputLabel>
+                  <TextInput id="estado" v-model="form.estado" required
+                    type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.estado" class="mt-2"></InputError>
+
                   
-                  <InputLabel for="tipoAsistencia" value="tipo Asistencia" class="text-center" />
-                  <TextInput id="tipoAsistencia" v-model="form.tipoAsistencia" autofocus required
-                             type="text" class="mt-1 block w-full align-sub" />
-                  <InputError :message="form.errors.tipoAsistencia" class="mt-2" />
+                  <InputLabel for="fechaFabricacion" value="FECHA DE FABRICACIÓN" class="text-center"></InputLabel>
+                  <TextInput id="fechaFabricacion" v-model="form.fechaFabricacion" required
+                  type="date" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.fechaFabricacion" class="mt-2"></InputError>
                   
-                  <InputLabel for="fechaInstalacion" value="fecha Instalacion" class="text-center" />
-                  <TextInput id="fechaInstalacion" v-model="form.fechaInstalacion" autofocus required
-                             type="text" class="mt-1 block w-full align-sub" />
-                  <InputError :message="form.errors.fechaInstalacion" class="mt-2" />
-                  
-                  <InputLabel for="tipoMantenimiento" value="tipo Mantenimiento" class="text-center" />
-                  <TextInput id="tipoMantenimiento" v-model="form.tipoMantenimiento" autofocus required
-                             type="text" class="mt-1 block w-full align-sub" />
-                  <InputError :message="form.errors.tipoMantenimiento" class="mt-2" />
-                  
-                  <InputLabel for="fechaMantenimiento" value="fecha Mantenimiento" class="text-center" />
-                  <TextInput id="fechaMantenimiento" v-model="form.fechaMantenimiento" autofocus required
-                             type="text" class="mt-1 block w-full align-sub" />
-                  <InputError :message="form.errors.fechaMantenimiento" class="mt-2" />
-                  
+                  <InputLabel for="tipoAsistencia" value="TIPO DE ASISTENCIA" class="text-center"></InputLabel>
+                  <TextInput id="tipoAsistencia" v-model="form.tipoAsistencia" required
+                  type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.tipoAsistencia" class="mt-2"></InputError>
+
                 </div>
               </div>
-  
-              <!-- Columna derecha -->
-              <div class="col-span-1" style="margin-top: 0">
-                <div class="flex flex-col">
-                  <InputLabel for="tipoPieza" value="tipo Pieza" class="text-center" />
-                  <TextInput id="tipoPieza" v-model="form.tipoPieza" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.tipoPieza" class="mt-2" />
-  
-                  <InputLabel for="fechaCambioPieza" value="fecha Cambio Pieza" class="text-center" />
-                  <TextInput id="fechaCambioPieza" v-model="form.fechaCambioPieza" autofocus required
-                             type="date" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.fechaCambioPieza" class="mt-2" />
-  
-                  <InputLabel for="numeroCiclos" value="numero Ciclos" class="text-center" />
-                  <TextInput id="numeroCiclos" v-model="form.numeroCiclos" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.numeroCiclos" class="mt-2" />
 
-                  <InputLabel for="fechaIncidente" value="fecha Incidente" class="text-center" />
-                  <TextInput id="fechaIncidente" v-model="form.fechaIncidente" autofocus required
-                             type="date" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.fechaIncidente" class="mt-2" />
+                    <!-- Columna 2 -->
+                <div class="col-span-1">
+                  <div class="flex flex-col">
+
+                  <InputLabel for="fechaInstalacion" value="FECHA DE INSTALACIÓN" class="text-center"></InputLabel>
+                  <TextInput id="fechaInstalacion" v-model="form.fechaInstalacion" required
+                  type="date" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.fechaInstalacion" class="mt-2"></InputError>
+
+
+                  <InputLabel for="tipoMantenimiento" value="TIPO DE MANTENIMIENTO" class="text-center"></InputLabel>
+                  <TextInput id="tipoMantenimiento" v-model="form.tipoMantenimiento" required
+                  type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.tipoMantenimiento" class="mt-2"></InputError>
+
+                  <InputLabel for="fechaMantenimiento" value="FECHA DE MANTENIMIENTO" class="text-center"></InputLabel>
+                  <TextInput id="fechaMantenimiento" v-model="form.fechaMantenimiento" required
+                   type="date" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.fechaMantenimiento" class="mt-2"></InputError>
   
-                  <InputLabel for="observaciones" value="observaciones" class="text-center" />
-                  <TextInput id="observaciones" v-model="form.observaciones" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.observaciones" class="mt-2" />
+                  <InputLabel for="tipoPieza" value="TIPO DE PIEZA" class="text-center"></InputLabel>
+                  <TextInput id="tipoPieza" v-model="form.tipoPieza" required
+                    type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.tipoPieza" class="mt-2"></InputError>
   
-                  <InputLabel for="img" value="imagen" class="text-center" />
-                  <TextInput id="img" v-model="form.img" autofocus required
-                             type="text" class="mt-1 block w-full" />
-                  <InputError :message="form.errors.img" class="mt-2" />
-  
-                  <InputLabel for="cliente_id" value="cliente:"></InputLabel>
-                  <SelectInput id="cliente_id" :options="clientes" 
-                  v-model="form.cliente_id" class="mt-1 block w-3/4"></SelectInput>
+                  <InputLabel for="fechaCambioPieza" value="FECHA CAMBIO DE LA PIEZA" class="text-center"></InputLabel>
+                  <TextInput id="fechaCambioPieza" v-model="form.fechaCambioPieza" required
+                    type="date" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.fechaCambioPieza" class="mt-2"></InputError>
+                  
+
+                </div>
+              </div>
+                 <!-- Columna 3 -->
+                <div class="col-span-1">
+                  <div class="flex flex-col">
+
+                  <InputLabel for="numeroCiclos" value="CICLOS" class="text-center"></InputLabel>
+                  <TextInput id="numeroCiclos" v-model="form.numeroCiclos" required
+                  type="number" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.numeroCiclos" class="mt-2"></InputError>
+
+                  <InputLabel for="fechaIncidente" value="FECHA DEL INCIDENTE" class="text-center"></InputLabel>
+                  <TextInput id="fechaIncidente" v-model="form.fechaIncidente" required
+                  type="date" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
+
+                  <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
+                  <TextInput id="observaciones" v-model="form.observaciones" required
+                  type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
+
+                  <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
+                  <TextInput id="img" v-model="form.img" required
+                  type="text" class="mt-1 block w-full"></TextInput>
+                  <InputError :message="form.errors.img" class="mt-2"></InputError>
+
+                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
+                  <SelectInput id="cliente_id" :options="clientes"
+                   v-model="form.cliente_id" type="text" class="mt-1 block w-full"
+                  ></SelectInput>
                   <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
-  
                 </div>
-              </div>
-              <div class="col-span-2 text-center mt-4">
+              </div> 
+              <div class="col-span-3 text-center mt-2">
               <PrimaryButton :disabled="form.processing">
                 <i class="fa-solid fa-save"></i> Guardar
               </PrimaryButton>
