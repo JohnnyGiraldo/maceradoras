@@ -5,7 +5,10 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
-import SelectInput from '@/Components/SelectInput.vue';
+import Swal from 'sweetalert2';
+import { ref } from 'vue';
+
+const operation = ref(1);
 
 const form = useForm({
     pais:'',
@@ -15,7 +18,20 @@ const form = useForm({
     telefono:'',
     direccion:'',
 });
+const save = () => {
+    const onSuccessMessage = operation.value === 1 ? 'Cliente creado' : 'Cliente actualizado';
+    const routeName = operation.value === 1 ? 'clientes.store' : `clientes.update/${id.value}`;
 
+    form.post(route(routeName), {
+        onSuccess: () => {
+            ok(onSuccessMessage);
+        }
+    });
+};
+const ok = (msj) => {
+    form.reset();
+    Swal.fire({ title: msj, icon: 'success' });
+};
 
 </script>
 
@@ -85,7 +101,7 @@ const form = useForm({
               </div>
                 
                 <div class="col-span-2 text-center mt-2">
-                <PrimaryButton :disabled="form.processing">
+                <PrimaryButton :disabled="form.processing" @click="save">
                   <i class="fa-solid fa-save"></i> Guardar
                 </PrimaryButton>
                 </div>

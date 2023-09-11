@@ -22,6 +22,7 @@ const formPage = useForm({});
 const onPageClick = (event)=>{
     formPage.get(route('clientes.index',{page:event}));
 }
+
 const deleteCliente = (id, institucion) => {
     const alerta = Swal.mixin({
         buttonsStyling: true

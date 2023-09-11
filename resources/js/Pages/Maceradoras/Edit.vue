@@ -6,8 +6,12 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
 
-
+const ok = (msj) => {
+    form.reset();
+    Swal.fire({ title: msj, icon: 'success' });
+};
 
 const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
 
@@ -28,6 +32,14 @@ const form = useForm({
   img: props.maceradora.img,
   cliente_id: props.maceradora.cliente_id
 });
+const edit = () => {
+    form.put(route('maceradoras.update',serial.value),{
+            onSuccess: () => {ok('Maceradora actualizada')}
+
+    });
+};
+
+
 </script>
 
 <template>
@@ -142,8 +154,8 @@ const form = useForm({
                 </div>
               </div> 
               <div class="col-span-3 text-center mt-2">
-              <PrimaryButton :disabled="form.processing">
-                <i class="fa-solid fa-save"></i> Guardar
+              <PrimaryButton :disabled="form.processing" @click="edit">
+                <i class="fa-solid fa-save"></i> Editar
               </PrimaryButton>
             </div>
             </form>

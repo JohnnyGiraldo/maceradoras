@@ -113,8 +113,8 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2">{{ mac.fechaCambioPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.numeroCiclos }}</td>
                         <td class="border border-gray-400 px-2 py-2">{{ mac.fechaIncidente}}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.observaciones }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.img }}</td>
+                        <td class="border border-gray-400 px-2 py-2">{{ mac.observaciones.substring(0, 10) }}</td>
+                        <td class="border border-gray-400 px-2 py-2">{{ mac.img.substring(0, 10) }}</td>
                         <td class="border border-gray-400 px-2 py-2">
 
                             <Link :href="route('maceradoras.edit',mac)"

@@ -6,9 +6,10 @@ import SelectInput from '@/Components/SelectInput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+import { ref } from 'vue';
 
-const props = defineProps({clientes: { type: Object } });
-
+const operation = ref(1);
 const form = useForm({serial:'',
     modelo:'',
     estado:'',
@@ -25,8 +26,21 @@ const form = useForm({serial:'',
     img:'',
     cliente_id:'',
 });
+const save = () => {
+    const onSuccessMessage = operation.value === 1 ? 'Maceradora createda' : 'Maceradora actualizada';
+    const routeName = operation.value === 1 ? 'maceradoras.store' : `maceradoras.update/${serial.value}`;
 
+    form.post(route(routeName), {
+        onSuccess: () => {
+            ok(onSuccessMessage);
+        }
+    });
+};
 
+const ok = (msj) => {
+    form.reset();
+    Swal.fire({ title: msj, icon: 'success' });
+};
 </script>
 
 <template>
@@ -55,8 +69,8 @@ const form = useForm({serial:'',
                   <label for="modelo" value="modelo" class="block font-medium text-gray-700">Modelo</label>
                   <div class="mt-1 relative rounded-md shadow-sm">
                   <select id="modelo" v-model="form.modelo" required
-                    class="block form-select px-4 py-2 w-3/4 rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                        <option>Vortex</option>
+                    class="mt-1 block w-full rounded-md">
+                        <option>Vortex +</option>
                         <option>Compact +</option>
                   </select>
                 <p class="text-red-500 mt-2" v-if="form.errors.modelo">{{ form.errors.modelo }}</p>
@@ -80,7 +94,6 @@ const form = useForm({serial:'',
 
                 </div>
               </div>
-
                     <!-- Columna 2 -->
                 <div class="col-span-1">
                   <div class="flex flex-col">
@@ -135,7 +148,7 @@ const form = useForm({serial:'',
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
                   <TextInput id="img" v-model="form.img" required
-                  type="text" class="mt-1 block w-full"></TextInput>
+                  type="file" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
                   <InputLabel for="cliente_id" value="CLIENTE:" class="text-center"></InputLabel>
@@ -145,9 +158,8 @@ const form = useForm({serial:'',
                   <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
                 </div>
               </div> 
-
                 <div class="col-span-3 text-center mt-2">
-                <PrimaryButton :disabled="form.processing">
+                <PrimaryButton :disabled="form.processing" @click="save">
                 <i class="fa-solid fa-save"></i> Guardar
                 </PrimaryButton>
                 </div>

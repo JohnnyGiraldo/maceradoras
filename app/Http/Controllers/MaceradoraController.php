@@ -49,15 +49,13 @@ class MaceradoraController extends Controller
             'numeroCiclos' => 'required|max:150',
             'fechaIncidente' => 'required|max:150',
             'observaciones' => 'required|max:150',
-            'img' => 'required|max:150',
+            'img' => '',
             'cliente_id' => 'required|max:150'
         ]);
         $maceradora = new Maceradora($request->input());
         $maceradora->save();
         return redirect('maceradoras');
     }
-
-
     public function edit(Maceradora $maceradora)
     {
         $clientesArray = Cliente::all();
