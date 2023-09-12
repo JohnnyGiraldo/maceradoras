@@ -9,8 +9,11 @@ import { Head,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import { ref } from 'vue';
 
+const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
+
 const operation = ref(1);
-const form = useForm({serial:'',
+const form = useForm({
+    serial:'',
     modelo:'',
     estado:'',
     fechaFabricacion:'',
