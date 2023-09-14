@@ -35,7 +35,7 @@ const form = useForm({
               <div class="col-span-1">
                 <div class="flex flex-col">
 
-                 <label for="pais" value="Pais" class="block font-medium text-gray-700">País</label>
+                 <InputLabel for="pais" value="Pais" class="block font-medium text-gray-700 text-center">País</InputLabel>
                  <div class="mt-1 relative rounded-md shadow-sm">
                   <select id="pais" v-model="form.pais" required
                   class="block form-select px-4 py-2 w-full rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">

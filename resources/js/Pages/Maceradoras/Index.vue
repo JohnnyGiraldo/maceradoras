@@ -100,21 +100,21 @@ const deleteMaceradora = (serial) => {
                     </thead>
                     <tbody>
                         <tr v-for="mac, i in maceradoras.data" :key="mac.serial">
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.cliente }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.serial }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.modelo }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.estado }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.fechaFabricacion }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.tipoAsistencia }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.fechaInstalacion }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.tipoMantenimiento }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.fechaMantenimiento }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.tipoPieza }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.fechaCambioPieza }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.numeroCiclos }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.fechaIncidente}}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.observaciones.substring(0, 10) }}</td>
-                        <td class="border border-gray-400 px-2 py-2">{{ mac.img.substring(0, 10) }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.cliente }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.serial }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.modelo }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.estado }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaFabricacion }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.tipoAsistencia }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaInstalacion }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.tipoMantenimiento }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaMantenimiento }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.tipoPieza }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaCambioPieza }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente}}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones.substring(0, 10) }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.img.substring(0, 10) }}</td>
                         <td class="border border-gray-400 px-2 py-2">
 
                             <Link :href="route('maceradoras.edit',mac)"

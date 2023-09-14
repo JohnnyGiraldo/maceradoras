@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Agregar clase personalizada para #0E9D83 */
+.bg-custom-teal {
+    background-color: #0E9D83;
+}
+
+/* Agregar clase personalizada para #39748B */
+.bg-custom-blue {
+    background-color: #39748B;
+}

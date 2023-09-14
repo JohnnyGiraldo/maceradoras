@@ -45,10 +45,6 @@ onMounted(() => {
 const canLogin = true; 
 const canRegister = true; 
 
-const route = (name) => {
-
-};
-
 </script>
 
 <template>
@@ -60,12 +56,11 @@ const route = (name) => {
         <div class="overlay">
           <div class="navbar">
             <div class="logo">
-              <img :src="'/img/descarga-removebg-preview.png'" alt="Imagen del slider"/>
+              <img :src="'/img/vernacare.png'" alt="Imagen del slider"/>
             </div>
           </div>
           <div class="content">
-            <h1>ALKAMEDICA</h1>
-            <h3>Soluciones Avanzadas en Control de Infecciones</h3>
+           <img src="/img/logo.png" alt="logo-alkamedica"/>
           </div>
           <br>
           <br>
@@ -82,11 +77,7 @@ const route = (name) => {
       </div>
     </div>
   </template>
-  
- 
-
-<style>
-
+  <style>
 *{
     margin: 0;
     padding: 0;
@@ -123,6 +114,20 @@ const route = (name) => {
     100%{
         transform: scale(1.3);
     }
+}
+.btn-1 {
+    background-color: #0E9D83;
+}
+.btn-1:hover{
+    border: 2px solid #fff;
+    background: #39748B;
+}
+.btn-2 {
+    background-color: #39748B;
+}
+.btn-2:hover{
+    border: 2px solid #fff;
+    background: #0E9D83;
 }
 .overlay{
     width: 100%;
@@ -180,10 +185,6 @@ a:hover { /* Corrección aquí */
 .a-2{
     border: 2px solid #fff;
     background: transparent;
-}
-.btn-2:hover{
-    border: 2px solid #fd7250;
-    background: #fd7250;
 }
 .content {
     /* Otros estilos para el contenedor de contenido */
