@@ -145,8 +145,8 @@ const ok = (msj) => {
                   <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
 
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
-                  <TextInput id="observaciones" v-model="form.observaciones" required
-                  type="text" class="mt-1 block w-full"></TextInput>
+                  <Textarea id="observaciones" v-model="form.observaciones" required
+                  type="text" class="mt-1 block w-full"></Textarea>
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>

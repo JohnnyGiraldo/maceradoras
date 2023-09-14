@@ -24,7 +24,7 @@ class ClienteController extends Controller
         'ciudad' => 'required|max:100',
         'institucion' => 'required|max:100',
         'email' => 'required|max:35',
-        'telefono' => 'required|max:25',
+        'telefono' => ['required', 'regex:/^[0-9()+\-.\s]*$/', 'max:25'],
         'direccion' => 'required|max:100',
 ]);
         $cliente = new Cliente($request->input());
@@ -45,7 +45,7 @@ class ClienteController extends Controller
         'ciudad' => 'required|max:100',
         'institucion' => 'required|max:100',
         'email' => 'required|max:35',
-        'telefono' => 'required|max:25',
+        'telefono' => ['required', 'regex:/^[0-9()+\-.\s]*$/', 'max:25'],
         'direccion' => 'required|max:100',
 ]);
         $cliente->update($request->all());

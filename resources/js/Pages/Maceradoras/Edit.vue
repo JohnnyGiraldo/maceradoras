@@ -65,16 +65,18 @@ const edit = () => {
                     type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.serial" class="mt-2"></InputError>
   
-                  <InputLabel for="modelo" value="MODELO" class="text-center"></InputLabel>
-                  <TextInput id="modelo" v-model="form.modelo" required
-                    type="text" class="mt-1 block w-full"></TextInput>
-                  <InputError :message="form.errors.modelo" class="mt-2"></InputError>
-  
+                  <InputLabel for="modelo" value="modelo" class="block font-medium text-gray-700 text-center">País</InputLabel>
+                  <select id="modelo" v-model="form.modelo" required
+                  class="block form-select px-4 py-2 w-full rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <option value="Colombia">Compact +</option>
+                        <option value="Costa Rica">Vortex +</option>
+                  </select>
+                  <p class="text-red-500 mt-2" v-if="form.errors.modelo">{{ form.errors.pais }}</p>
+                  
                   <InputLabel for="estado" value="ESTADO" class="text-center"></InputLabel>
                   <TextInput id="estado" v-model="form.estado" required
                     type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.estado" class="mt-2"></InputError>
-
                   
                   <InputLabel for="fechaFabricacion" value="FECHA DE FABRICACIÓN" class="text-center"></InputLabel>
                   <TextInput id="fechaFabricacion" v-model="form.fechaFabricacion" required
@@ -119,7 +121,6 @@ const edit = () => {
                     type="date" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.fechaCambioPieza" class="mt-2"></InputError>
                   
-
                 </div>
               </div>
                  <!-- Columna 3 -->
@@ -137,8 +138,8 @@ const edit = () => {
                   <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
 
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
-                  <TextInput id="observaciones" v-model="form.observaciones" required
-                  type="text" class="mt-1 block w-full"></TextInput>
+                  <textarea id="observaciones" v-model="form.observaciones" required
+                  type="text" class="mt-1 block w-full"></textarea>
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>

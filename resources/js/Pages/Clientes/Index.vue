@@ -58,7 +58,7 @@ const deleteCliente = (id, institucion) => {
         </template>
 
         <div class="py-12">
-            <div class="bg-white grid v-screen place-items-center">
+            <div class="bg-custom-blue grid v-screen place-items-center">
                 <div class="mt-3 mb-3 flex">
                     <Link :href="route('clientes.create')"
                     :class="'px-4 py-2 bg-gray-800 text-white border rounded-md font-semibold text-xs'">
