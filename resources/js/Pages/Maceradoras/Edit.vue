@@ -7,12 +7,12 @@ import SelectInput from '@/Components/SelectInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
+import FileInput from '@/Components/FileInput.vue';
 
 const ok = (msj) => {
     form.reset();
     Swal.fire({ title: msj, icon: 'success' });
 };
-
 const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
 
 const form = useForm({
@@ -29,17 +29,9 @@ const form = useForm({
   numeroCiclos: props.maceradora.numeroCiclos,
   fechaIncidente: props.maceradora.fechaIncidente,
   observaciones: props.maceradora.observaciones,
-  img: props.maceradora.img,
+  img:props.maceradora.img,
   cliente_id: props.maceradora.cliente_id
 });
-const edit = () => {
-    form.put(route('maceradoras.update',serial.value),{
-            onSuccess: () => {ok('Maceradora actualizada')}
-
-    });
-};
-
-
 </script>
 
 <template>
@@ -53,8 +45,9 @@ const edit = () => {
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="form.patch(route('maceradoras.update',form.serial))"
-                  class="space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4">
+            <form @submit.prevent="form.patch(route('maceradoras.update', { id: form.id }), {
+                 onSuccess: () => { ok('Maceradora actualizada') }
+              })" class="space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
 
                <!-- Columna 1 -->
                <div class="col-span-1">
@@ -65,11 +58,11 @@ const edit = () => {
                     type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.serial" class="mt-2"></InputError>
   
-                  <InputLabel for="modelo" value="modelo" class="block font-medium text-gray-700 text-center">País</InputLabel>
+                  <InputLabel for="modelo" value="MODELO" class="block font-medium text-gray-700 text-center">País</InputLabel>
                   <select id="modelo" v-model="form.modelo" required
                   class="block form-select px-4 py-2 w-full rounded-md transition duration-150 ease-in-out sm:text-sm sm:leading-5">
-                        <option value="Colombia">Compact +</option>
-                        <option value="Costa Rica">Vortex +</option>
+                        <option value="Compact +">Compact +</option>
+                        <option value="Vortex +">Vortex +</option>
                   </select>
                   <p class="text-red-500 mt-2" v-if="form.errors.modelo">{{ form.errors.pais }}</p>
                   
@@ -143,8 +136,8 @@ const edit = () => {
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
-                  <TextInput id="img" v-model="form.img" required
-                  type="text" class="mt-1 block w-full"></TextInput>
+                  <FileInput id="img" v-model="form.img" 
+                  type="file" class="mt-1 block w-full"></FileInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
                   <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
@@ -155,7 +148,7 @@ const edit = () => {
                 </div>
               </div> 
               <div class="col-span-3 text-center mt-2">
-              <PrimaryButton :disabled="form.processing" @click="edit">
+              <PrimaryButton :disabled="form.processing" @click="update">
                 <i class="fa-solid fa-save"></i> Editar
               </PrimaryButton>
             </div>

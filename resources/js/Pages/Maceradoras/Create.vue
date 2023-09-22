@@ -8,6 +8,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import { ref } from 'vue';
+import FileInput from '@/Components/FileInput.vue';
 
 const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
 
@@ -57,8 +58,8 @@ const ok = (msj) => {
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="$event => form.post(route('maceradoras.store'))"
-              class=" space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4">
+            <form
+              class=" space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
   
              <!-- Columna 1 -->
                <div class="col-span-1">
@@ -69,7 +70,7 @@ const ok = (msj) => {
                     type="text" class="mt-1 block w-full"></TextInput>
                   <InputError :message="form.errors.serial" class="mt-2"></InputError>
   
-                  <label for="modelo" value="modelo" class="block font-medium text-gray-700">Modelo</label>
+                  <label for="modelo" value="MODELO" class="block font-medium text-gray-700 text-center">Modelo</label>
                   <div class="mt-1 relative rounded-md shadow-sm">
                   <select id="modelo" v-model="form.modelo" required
                     class="mt-1 block w-full rounded-md">
@@ -150,8 +151,8 @@ const ok = (msj) => {
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
-                  <TextInput id="img" v-model="form.img" required
-                  type="file" class="mt-1 block w-full"></TextInput>
+                  <FileInput id="img"  required
+                  type="file" class="mt-1 block w-full"></FileInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
                   <InputLabel for="cliente_id" value="CLIENTE:" class="text-center"></InputLabel>
@@ -162,7 +163,7 @@ const ok = (msj) => {
                 </div>
               </div> 
                 <div class="col-span-3 text-center mt-2">
-                <PrimaryButton :disabled="form.processing" @click="save">
+                <PrimaryButton :disabled="form.processing" @click='save'>
                 <i class="fa-solid fa-save"></i> Guardar
                 </PrimaryButton>
                 </div>

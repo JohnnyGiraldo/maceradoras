@@ -82,7 +82,7 @@ const deleteCliente = (id, institucion) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="cli, i in clientes" :key="cli.id">
+                        <tr v-for="cli, i in clientes.data" :key="cli.id">
                         <td class="border border-gray-400 px-4 py-4 text-center">{{ (i+1) }}</td>
                         <td class="border border-gray-400 px-4 py-4 text-center">{{ cli.pais }}</td>
                         <td class="border border-gray-400 px-4 py-4 text-center">{{ cli.ciudad }}</td>

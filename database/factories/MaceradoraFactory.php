@@ -30,8 +30,10 @@ class MaceradoraFactory extends Factory
             'numeroCiclos' => $this->faker->numberBetween(1, 1000),
             'fechaIncidente' => $this->faker->date,
             'observaciones' => $this->faker->sentence,
-            'img' => $this->faker->imageUrl,
-            'cliente_id' => \App\Models\Cliente::inRandomOrder()->first()->id,
+            'img' => 'post/' . $this->faker->image('public/storage/posts', 640, 480, null, false),
+            'cliente_id' => function () {
+                return \App\Models\Cliente::inRandomOrder()->first()->id;
+            },
         ];
     }
 }

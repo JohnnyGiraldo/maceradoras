@@ -100,7 +100,7 @@ const deleteMaceradora = (serial) => {
                     </thead>
                     <tbody>
                         <tr v-for="mac, i in maceradoras.data" :key="mac.serial">
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.cliente }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.institucion }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.serial }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.modelo }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.estado }}</td>
@@ -113,8 +113,8 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaCambioPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente}}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones.substring(0, 10) }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.img.substring(0, 10) }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones ? mac.observaciones.substring(0, 10) : '' }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center"> <img src="{{ $photo->temporaryUrl(img) }}"></td>
                         <td class="border border-gray-400 px-2 py-2">
 
                             <Link :href="route('maceradoras.edit',mac)"

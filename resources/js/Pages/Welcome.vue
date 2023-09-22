@@ -51,7 +51,7 @@ const canRegister = true;
     <div>
       <div class="banner">
         <div class="slider">
-          <img :src="currentImage" id="slideImg" alt="Imagen del slider" />
+          <img src="/img/img3.png" id="slideImg" alt="Imagen del slider" />
         </div>
         <div class="overlay">
           <div class="navbar">
@@ -70,8 +70,8 @@ const canRegister = true;
           <br>
           <br>
             <div class="buttons-container">
-              <a v-if="canLogin" href="/login" class="btn-1">INICIAR SESIÓN</a>
-              <a v-if="canRegister" href="/register" class="btn-2">REGISTRARSE</a>
+              <a v-if="canLogin" href="/login" class="btn-1"><h1>INICIAR SESIÓN</h1></a>
+              <a v-if="canRegister" href="/register" class="btn-2"><h3>REGISTRARSE</h3></a>
             </div>
         </div>
       </div>
@@ -210,6 +210,24 @@ a:hover { /* Corrección aquí */
     flex-direction: row;
     align-items: center;
     text-align: center;
+}
+@media (max-width: 768px) { /* Cambia 768px al ancho máximo deseado para dispositivos móviles */
+  .buttons-container {
+    flex-direction: column; /* Cambia a disposición de columna en dispositivos móviles */
+    align-items: center;
+    text-align: center;
+  }
+
+  .buttons-container a {
+    width: 100%; /* Establece el ancho al 100% para llenar el contenedor */
+    max-width: 200px; /* Establece un ancho máximo */
+    padding: 10px 0; /* Reducimos el espacio alrededor de los botones */
+    margin: 10px 0; /* Añade un margen vertical */
+  }
+
+  .buttons-container a .mobile-button-text {
+    font-size: 14px; /* Cambia el tamaño de fuente para dispositivos móviles */
+  }
 }
 
 </style>

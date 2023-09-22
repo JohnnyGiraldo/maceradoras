@@ -10,9 +10,10 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::all();
-        return Inertia::render('Clientes/Index',['clientes' => $clientes]);
         $clientes = Cliente::paginate(10);
+        
+        
+        return Inertia::render('Clientes/Index',['clientes' => $clientes]);
     }
     public function create()
     {

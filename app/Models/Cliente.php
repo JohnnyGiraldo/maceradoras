@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Cliente extends Model
 {
     use HasFactory;
-    protected $fillable = ['pais', 'ciudad','institucion', 'email','telefono','direccion','cliente_id',];
+
+    protected $primaryKey = 'id';
+
+    protected $fillable = ['pais', 'ciudad','institucion', 'email','telefono','direccion','id'];
   
 }

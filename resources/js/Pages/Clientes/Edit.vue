@@ -55,7 +55,6 @@ const form = useForm({
                              type="text" class="mt-1 block w-full" />
                   <InputError :message="form.errors.institucion" class="mt-2" />
 
-                  
                 </div>
               </div>
   
