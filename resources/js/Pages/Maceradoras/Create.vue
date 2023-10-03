@@ -11,7 +11,6 @@ import { ref } from 'vue';
 import FileInput from '@/Components/FileInput.vue';
 
 const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
-
 const operation = ref(1);
 const form = useForm({
     serial:'',
@@ -30,16 +29,6 @@ const form = useForm({
     img:'',
     cliente_id:'',
 });
-const save = () => {
-    const onSuccessMessage = operation.value === 1 ? 'Maceradora createda' : 'Maceradora actualizada';
-    const routeName = operation.value === 1 ? 'maceradoras.store' : `maceradoras.update/${serial.value}`;
-
-    form.post(route(routeName), {
-        onSuccess: () => {
-            ok(onSuccessMessage);
-        }
-    });
-};
 
 const ok = (msj) => {
     form.reset();
@@ -58,9 +47,10 @@ const ok = (msj) => {
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form
-              class=" space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
-  
+            <form @submit.prevent="form.post(route('maceradoras.store',maceradora),{
+             onSuccess: () => {ok('Maceradora Creada')}})"
+             class=" space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
+      
              <!-- Columna 1 -->
                <div class="col-span-1">
                   <div class="flex flex-col">
@@ -155,15 +145,16 @@ const ok = (msj) => {
                   type="file" class="mt-1 block w-full"></FileInput>
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
-                  <InputLabel for="cliente_id" value="CLIENTE:" class="text-center"></InputLabel>
+                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"
                    v-model="form.cliente_id" type="text" class="mt-1 block w-full"
                   ></SelectInput>
                   <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
                 </div>
               </div> 
+
                 <div class="col-span-3 text-center mt-2">
-                <PrimaryButton :disabled="form.processing" @click='save'>
+                <PrimaryButton :disabled="form.processing">
                 <i class="fa-solid fa-save"></i> Guardar
                 </PrimaryButton>
                 </div>

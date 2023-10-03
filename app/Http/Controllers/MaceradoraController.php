@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Livewire\WithFileUploads;
 
 
 
 class MaceradoraController extends Controller
 {
-    use WithFileUploads;
-
+    public $newImage;
     public function index() 
     {
         $maceradoras = Maceradora::select('maceradoras.serial','maceradoras.modelo',
@@ -41,26 +39,68 @@ class MaceradoraController extends Controller
     }
     public function store(Request $request)
     {
-    $request->validate([
-        'serial' => 'required|max:150',
-        'modelo' => 'required|max:150',
-        'estado' => 'required|max:150',
-        'fechaFabricacion' => 'required|max:150',
-        'tipoAsistencia' => 'required|max:150',
-        'fechaInstalacion' => 'required|max:150',
-        'tipoMantenimiento' => 'required|max:150',
-        'fechaMantenimiento' => 'required|max:150',
-        'tipoPieza' => 'required|max:150',
-        'fechaCambioPieza' => 'required|max:150',
-        'numeroCiclos' => 'required|max:150',
-        'fechaIncidente' => 'required|max:150',
-        'cliente_id' => 'required|max:150',
-        'img' => '|image|max:2048',
-    ]);
-    $maceradora = new Maceradora($request->input());
-    $maceradora->save();
-    return redirect('maceradoras');
-
+        $request->validate([
+            'serial' => 'required|max:150',
+            'modelo' => 'required|max:150',
+            'estado' => 'required|max:150',
+            'fechaFabricacion' => 'required|max:150',
+            'tipoAsistencia' => 'required|max:150',
+            'fechaInstalacion' => 'required|max:150',
+            'tipoMantenimiento' => 'required|max:150',
+            'fechaMantenimiento' => 'required|max:150',
+            'tipoPieza' => 'required|max:150',
+            'fechaCambioPieza' => 'required|max:150',
+            'numeroCiclos' => 'required|max:150',
+            'fechaIncidente' => 'required|max:150',
+            'cliente_id' => 'required|max:150',
+            'observaciones' => 'nullable|max:150',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    
+        // Verifica si se ha cargado una imagen antes de intentar almacenarla.
+        if ($request->hasFile('img')) {
+            $maceradoraImage = $request->file('img')->store('public/posts');
+    
+            // Crear la Maceradora y asignar la ruta de la imagen.
+            Maceradora::create([
+                'serial' => $request->input('serial'),
+                'modelo' => $request->input('modelo'),
+                'estado' => $request->input('estado'),
+                'fechaFabricacion' => $request->input('fechaFabricacion'),
+                'tipoAsistencia' => $request->input('tipoAsistencia'),
+                'fechaInstalacion' => $request->input('fechaInstalacion'),
+                'tipoMantenimiento' => $request->input('tipoMantenimiento'),
+                'fechaMantenimiento' => $request->input('fechaMantenimiento'),
+                'tipoPieza' => $request->input('tipoPieza'),
+                'fechaCambioPieza' => $request->input('fechaCambioPieza'),
+                'numeroCiclos' => $request->input('numeroCiclos'),
+                'fechaIncidente' => $request->input('fechaIncidente'),
+                'cliente_id' => $request->input('cliente_id'),
+                'observaciones' => $request->input('observaciones'),
+                'img' => $maceradoraImage,
+            ]);
+        } else {
+            // Si no se cargó una imagen, crea la Maceradora sin la ruta de la imagen.
+            Maceradora::create([
+                'serial' => $request->input('serial'),
+                'modelo' => $request->input('modelo'),
+                'estado' => $request->input('estado'),
+                'fechaFabricacion' => $request->input('fechaFabricacion'),
+                'tipoAsistencia' => $request->input('tipoAsistencia'),
+                'fechaInstalacion' => $request->input('fechaInstalacion'),
+                'tipoMantenimiento' => $request->input('tipoMantenimiento'),
+                'fechaMantenimiento' => $request->input('fechaMantenimiento'),
+                'tipoPieza' => $request->input('tipoPieza'),
+                'fechaCambioPieza' => $request->input('fechaCambioPieza'),
+                'numeroCiclos' => $request->input('numeroCiclos'),
+                'fechaIncidente' => $request->input('fechaIncidente'),
+                'cliente_id' => $request->input('cliente_id'), 
+                'observaciones' => $request->input('observaciones')
+            ]);
+        }
+    
+        // Restablecer el formulario u otras acciones que necesites.
+        $this->reset();
     }
     public function edit(Maceradora $maceradora)
     {
@@ -74,6 +114,28 @@ class MaceradoraController extends Controller
         })->all();
         return Inertia::render('Maceradoras/Edit',['maceradora' => $maceradora,
         'clientes' => $clientes]);
+    }
+    public function update(Request $request, Maceradora $maceradora)
+    {
+        $request->validate([
+        'serial' => 'required|max:150',
+        'modelo' => 'required|max:150',
+        'estado' => 'required|max:150',
+        'fechaFabricacion' => 'required|max:150',
+        'tipoAsistencia' => 'required|max:150',
+        'fechaInstalacion' => 'required|max:150',
+        'tipoMantenimiento' => 'required|max:150',
+        'fechaMantenimiento' => 'required|max:150',
+        'tipoPieza' => 'required|max:150',
+        'fechaCambioPieza' => 'required|max:150',
+        'numeroCiclos' => 'required|max:150',
+        'fechaIncidente' => 'required|max:150',
+        'cliente_id' => 'required|max:150',
+        'observaciones' => 'nullable|max:150',
+        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+        $maceradora->update($request->all());
+        return redirect('maceradoras');
     }
     public function destroy(Maceradora $maceradora)
     {
@@ -90,7 +152,7 @@ class MaceradoraController extends Controller
         $maceradoras = Maceradora::select('maceradoras.serial', 'maceradoras.modelo', 'estado',
         'fechaFabricacion', 'tipoAsistencia', 'fechaInstalacion', 'tipoMantenimiento', 'fechaMantenimiento',
         'tipoPieza', 'fechaCambioPieza', 'numeroCiclos', 'fechaIncidente', 'observaciones', 'img',
-        'clientes.institucion as institucion') // Alias 'institucion' para la columna 'institucion' en clientes
+        'clientes.institucion as institucion')
         ->join('clientes', 'clientes.id', '=', 'maceradoras.cliente_id')
         ->get();
 
@@ -103,17 +165,21 @@ class MaceradoraController extends Controller
     public function create()
     {
         $clientesArray = Cliente::all();
+
         $clientes = $clientesArray->map(function ($cliente) {
             return [
                 'id' => $cliente->id,
                 'name' => $cliente->institucion,
             ];
         })->all();
-        return Inertia::render('Maceradoras/Create');
-        
-    }
 
+        return Inertia::render('Maceradoras/Create',[
+        'clientes' => $clientes]);
+    }
+    
+    
 }
+
 
 
 

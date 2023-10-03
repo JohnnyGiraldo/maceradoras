@@ -5,6 +5,12 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import Swal from 'sweetalert2';
+
+const ok = (msj) => {
+    form.reset();
+    Swal.fire({ title: msj, icon: 'success' });
+};
 
 const props = defineProps({ cliente: { type: Object } });
 const form = useForm({
@@ -28,7 +34,8 @@ const form = useForm({
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="form.patch(route('clientes.update',cliente))"
+            <form @submit.prevent="form.patch(route('clientes.update',cliente),{
+             onSuccess: () => {ok('Cliente actualizado')}})"
                   class="space-y-2 max-w-xl mx-auto grid grid-cols-2 gap-4">
 
                   <!-- Columna izquierda -->

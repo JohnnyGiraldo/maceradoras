@@ -4,10 +4,11 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
+import FileInput from '@/Components/FileInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
-import FileInput from '@/Components/FileInput.vue';
+
 
 const ok = (msj) => {
     form.reset();
@@ -26,11 +27,12 @@ const form = useForm({
   fechaMantenimiento: props.maceradora.fechaMantenimiento,
   tipoPieza: props.maceradora. tipoPieza,
   fechaCambioPieza: props.maceradora.fechaCambioPieza,
-  numeroCiclos: props.maceradora.numeroCiclos,
+  numeroCiclos: parseInt(props.maceradora.numeroCiclos),
   fechaIncidente: props.maceradora.fechaIncidente,
   observaciones: props.maceradora.observaciones,
   img:props.maceradora.img,
-  cliente_id: props.maceradora.cliente_id
+  cliente_id: props.maceradora.cliente_id,
+
 });
 </script>
 
@@ -45,10 +47,8 @@ const form = useForm({
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="form.patch(route('maceradoras.update', { id: form.id }), {
-                 onSuccess: () => { ok('Maceradora actualizada') }
-              })" class="space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
-
+            <form @submit.prevent="form.patch(route('maceradoras.update',maceradora),{onSuccess: () => {ok('Maceradora actualizada')}})" 
+             class="space-y-2 max-w-xl mx-auto grid grid-cols-3 gap-4" enctype="multipart/form-data">
                <!-- Columna 1 -->
                <div class="col-span-1">
                   <div class="flex flex-col">
@@ -131,24 +131,28 @@ const form = useForm({
                   <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
 
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
-                  <textarea id="observaciones" v-model="form.observaciones" required
+                  <textarea  id="observaciones" v-model="form.observaciones"
                   type="text" class="mt-1 block w-full"></textarea>
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
 
                   <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
-                  <FileInput id="img" v-model="form.img" 
-                  type="file" class="mt-1 block w-full"></FileInput>
+                  <FileInput id="img" v-model="form.img" name="img" required
+                  type="file" class="mt-1 block w-full"/>
+                  <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                  {{ form.progress.percentage }}%
+                 </progress>
+
                   <InputError :message="form.errors.img" class="mt-2"></InputError>
 
-                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
+                 <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"
                    v-model="form.cliente_id" type="text" class="mt-1 block w-full"
                   ></SelectInput>
                   <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
                 </div>
-              </div> 
+              </div>  
               <div class="col-span-3 text-center mt-2">
-              <PrimaryButton :disabled="form.processing" @click="update">
+              <PrimaryButton :disabled="form.processing">
                 <i class="fa-solid fa-save"></i> Editar
               </PrimaryButton>
             </div>
@@ -159,3 +163,5 @@ const form = useForm({
       </div>
     </AuthenticatedLayout>
   </template>
+
+

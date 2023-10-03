@@ -40,11 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('clientes', ClienteController::class);
     Route::resource('maceradoras', MaceradoraController::class);
-    Route::get('graphic',[MaceradoraController::class,'MaceradoraByCliente'])->name('graphic');
-    Route::get('reports',[MaceradoraController::class,'reports'])->name('reports');
-    Route::put('/maceradoras/{maceradora}', [MaceradoraController::class, 'update'])->name('maceradoras.update');
+    Route::get('graphic', [MaceradoraController::class, 'MaceradoraByCliente'])->name('graphic');
+    Route::get('reports', [MaceradoraController::class, 'reports'])->name('reports');
     Route::get('/maceradoras', [MaceradoraController::class, 'index'])->name('maceradoras.index');
-    Route::get('/clientes/{id}/has-maceradora', 'ClienteController@hasMaceradora');
 });
+
 
 require __DIR__.'/auth.php';

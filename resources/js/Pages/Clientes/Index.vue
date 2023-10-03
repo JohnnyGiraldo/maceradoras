@@ -9,6 +9,12 @@ import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 const props = defineProps({
     clientes: {type:Object}
 });
+
+const formPage = useForm({});
+const onPageClick = (event)=>{
+    formPage.get(route('clientes.index',{page:event}));
+}
+
 const form = useForm({
     cliente_id:'',
     pais:'',
@@ -18,10 +24,7 @@ const form = useForm({
     telefono:'',
     direccion:'',
 });
-const formPage = useForm({});
-const onPageClick = (event)=>{
-    formPage.get(route('clientes.index',{page:event}));
-}
+
 
 const deleteCliente = (id, institucion) => {
     const alerta = Swal.mixin({

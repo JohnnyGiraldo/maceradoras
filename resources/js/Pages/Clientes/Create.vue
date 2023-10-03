@@ -46,8 +46,7 @@ const ok = (msj) => {
       <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
           <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg py-12">
-            <form @submit.prevent="$event => form.post(route('clientes.store'))"
-              class=" space-y-2 max-w-xl mx-auto grid grid-cols-2 gap-4">
+            <form @submit.prevent class=" space-y-2 max-w-xl mx-auto grid grid-cols-2 gap-4">
   
               <!-- Columna izquierda -->
               <div class="col-span-1">

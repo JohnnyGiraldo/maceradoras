@@ -211,6 +211,20 @@ a:hover { /* Corrección aquí */
     align-items: center;
     text-align: center;
 }
+.content h1 {
+    font-size: 36px; /* Tamaño de fuente más pequeño en dispositivos móviles */
+    text-align: center;
+}
+
+.content h3 {
+    font-size: 16px; /* Tamaño de fuente más pequeño en dispositivos móviles */
+    width: 80%;
+    margin: 20px auto 100px;
+    font-weight: 100;
+    line-height: 25px;
+    text-align: center;
+}
+
 @media (max-width: 768px) { /* Cambia 768px al ancho máximo deseado para dispositivos móviles */
   .buttons-container {
     flex-direction: column; /* Cambia a disposición de columna en dispositivos móviles */
@@ -228,6 +242,17 @@ a:hover { /* Corrección aquí */
   .buttons-container a .mobile-button-text {
     font-size: 14px; /* Cambia el tamaño de fuente para dispositivos móviles */
   }
+  .buttons-container a .btn-1,.btn-2 {
+    font-size: 10px; /* Cambia el tamaño de fuente para dispositivos móviles */
+  }
+  .content h1 {
+        font-size: 24px; /* Ajusta el tamaño de fuente para dispositivos móviles */
+    }
+
+    .content h3 {
+        font-size: 14px; /* Ajusta el tamaño de fuente para dispositivos móviles */
+        margin: 10px auto 50px; /* Ajusta el margen inferior para dispositivos móviles */
+    }
 }
 
 </style>

@@ -5,6 +5,7 @@ import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 
+
 const props = defineProps({
     maceradoras: {type:Object},
     clientes: {type:Object}
@@ -56,6 +57,7 @@ const deleteMaceradora = (serial) => {
     }
   });
 }
+
 </script>
 
 <template>
@@ -99,7 +101,7 @@ const deleteMaceradora = (serial) => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="mac, i in maceradoras.data" :key="mac.serial">
+                        <tr v-for="mac, in maceradoras.data" :key="mac.serial">
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.institucion }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.serial }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.modelo }}</td>
@@ -112,11 +114,12 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.tipoPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaCambioPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente}}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones ? mac.observaciones.substring(0, 10) : '' }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center"> <img src="{{ $photo->temporaryUrl(img) }}"></td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones }}</td>
+                        <td class="border border-gray-400 px-2 py-2 text-center">
+                        <img class="w-8 h-8 rounded-full" :src="'../../../../storage/app/public/posts/' + mac.img" alt="Imagen" /></td>
+                       
                         <td class="border border-gray-400 px-2 py-2">
-
                             <Link :href="route('maceradoras.edit',mac)"
                             :class="'px-4 py-2 bg-yellow-400 text-white border rounded-md font-semibold text-xs'">
                             <i class="fa-solid fa-edit"></i>
@@ -141,3 +144,5 @@ const deleteMaceradora = (serial) => {
         </div>
     </AuthenticatedLayout>
 </template>
+
+

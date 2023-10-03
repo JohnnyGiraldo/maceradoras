@@ -27,7 +27,7 @@ class ClienteController extends Controller
         'email' => 'required|max:35',
         'telefono' => ['required', 'regex:/^[0-9()+\-.\s]*$/', 'max:25'],
         'direccion' => 'required|max:100',
-]);
+    ]);
         $cliente = new Cliente($request->input());
         $cliente->save();
         return redirect('clientes');
@@ -48,7 +48,7 @@ class ClienteController extends Controller
         'email' => 'required|max:35',
         'telefono' => ['required', 'regex:/^[0-9()+\-.\s]*$/', 'max:25'],
         'direccion' => 'required|max:100',
-]);
+        ]);
         $cliente->update($request->all());
         return redirect('clientes');
     }
