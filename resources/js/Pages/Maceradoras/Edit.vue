@@ -30,7 +30,6 @@ const form = useForm({
   numeroCiclos: parseInt(props.maceradora.numeroCiclos),
   fechaIncidente: props.maceradora.fechaIncidente,
   observaciones: props.maceradora.observaciones,
-  img:props.maceradora.img,
   cliente_id: props.maceradora.cliente_id,
 
 });
@@ -134,15 +133,6 @@ const form = useForm({
                   <textarea  id="observaciones" v-model="form.observaciones"
                   type="text" class="mt-1 block w-full"></textarea>
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
-
-                  <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
-                  <FileInput id="img" v-model="form.img" name="img" required
-                  type="file" class="mt-1 block w-full"/>
-                  <progress v-if="form.progress" :value="form.progress.percentage" max="100">
-                  {{ form.progress.percentage }}%
-                 </progress>
-
-                  <InputError :message="form.errors.img" class="mt-2"></InputError>
 
                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"

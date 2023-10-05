@@ -13,13 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class MaceradoraController extends Controller
 {
-    public $newImage;
     public function index() 
     {
         $maceradoras = Maceradora::select('maceradoras.serial','maceradoras.modelo',
         'estado','fechaFabricacion','tipoAsistencia','fechaInstalacion',
         'tipoMantenimiento','fechaMantenimiento','tipoPieza','fechaCambioPieza',
-        'numeroCiclos','fechaIncidente','observaciones','img',
+        'numeroCiclos','fechaIncidente','observaciones',
         'cliente_id as cliente',
         'clientes.institucion as institucion')
         ->join('clientes','id','=','maceradoras.cliente_id')
@@ -54,54 +53,12 @@ class MaceradoraController extends Controller
             'fechaIncidente' => 'required|max:150',
             'cliente_id' => 'required|max:150',
             'observaciones' => 'nullable|max:150',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-    
-        // Verifica si se ha cargado una imagen antes de intentar almacenarla.
-        if ($request->hasFile('img')) {
-            $maceradoraImage = $request->file('img')->store('public/posts');
-    
-            // Crear la Maceradora y asignar la ruta de la imagen.
-            Maceradora::create([
-                'serial' => $request->input('serial'),
-                'modelo' => $request->input('modelo'),
-                'estado' => $request->input('estado'),
-                'fechaFabricacion' => $request->input('fechaFabricacion'),
-                'tipoAsistencia' => $request->input('tipoAsistencia'),
-                'fechaInstalacion' => $request->input('fechaInstalacion'),
-                'tipoMantenimiento' => $request->input('tipoMantenimiento'),
-                'fechaMantenimiento' => $request->input('fechaMantenimiento'),
-                'tipoPieza' => $request->input('tipoPieza'),
-                'fechaCambioPieza' => $request->input('fechaCambioPieza'),
-                'numeroCiclos' => $request->input('numeroCiclos'),
-                'fechaIncidente' => $request->input('fechaIncidente'),
-                'cliente_id' => $request->input('cliente_id'),
-                'observaciones' => $request->input('observaciones'),
-                'img' => $maceradoraImage,
-            ]);
-        } else {
-            // Si no se cargó una imagen, crea la Maceradora sin la ruta de la imagen.
-            Maceradora::create([
-                'serial' => $request->input('serial'),
-                'modelo' => $request->input('modelo'),
-                'estado' => $request->input('estado'),
-                'fechaFabricacion' => $request->input('fechaFabricacion'),
-                'tipoAsistencia' => $request->input('tipoAsistencia'),
-                'fechaInstalacion' => $request->input('fechaInstalacion'),
-                'tipoMantenimiento' => $request->input('tipoMantenimiento'),
-                'fechaMantenimiento' => $request->input('fechaMantenimiento'),
-                'tipoPieza' => $request->input('tipoPieza'),
-                'fechaCambioPieza' => $request->input('fechaCambioPieza'),
-                'numeroCiclos' => $request->input('numeroCiclos'),
-                'fechaIncidente' => $request->input('fechaIncidente'),
-                'cliente_id' => $request->input('cliente_id'), 
-                'observaciones' => $request->input('observaciones')
-            ]);
-        }
-    
-        // Restablecer el formulario u otras acciones que necesites.
-        $this->reset();
+        $maceradora = new Maceradora($request->input());
+        $maceradora->save();
+        return redirect('maceradoras');
     }
+     
     public function edit(Maceradora $maceradora)
     {
         $clientesArray = Cliente::all();
@@ -117,6 +74,7 @@ class MaceradoraController extends Controller
     }
     public function update(Request $request, Maceradora $maceradora)
     {
+        dd($request->validated());
         $request->validate([
         'serial' => 'required|max:150',
         'modelo' => 'required|max:150',
@@ -132,7 +90,6 @@ class MaceradoraController extends Controller
         'fechaIncidente' => 'required|max:150',
         'cliente_id' => 'required|max:150',
         'observaciones' => 'nullable|max:150',
-        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
         $maceradora->update($request->all());
         return redirect('maceradoras');
@@ -151,7 +108,7 @@ class MaceradoraController extends Controller
     public function reports(){
         $maceradoras = Maceradora::select('maceradoras.serial', 'maceradoras.modelo', 'estado',
         'fechaFabricacion', 'tipoAsistencia', 'fechaInstalacion', 'tipoMantenimiento', 'fechaMantenimiento',
-        'tipoPieza', 'fechaCambioPieza', 'numeroCiclos', 'fechaIncidente', 'observaciones', 'img',
+        'tipoPieza', 'fechaCambioPieza', 'numeroCiclos', 'fechaIncidente', 'observaciones',
         'clientes.institucion as institucion')
         ->join('clientes', 'clientes.id', '=', 'maceradoras.cliente_id')
         ->get();

@@ -8,7 +8,6 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import { ref } from 'vue';
-import FileInput from '@/Components/FileInput.vue';
 
 const props = defineProps({ maceradora: { type: Object },clientes: { type: Object } });
 const operation = ref(1);
@@ -26,7 +25,6 @@ const form = useForm({
     numeroCiclos:'',
     fechaIncidente:'',
     observaciones:'',
-    img:'',
     cliente_id:'',
 });
 
@@ -34,6 +32,7 @@ const ok = (msj) => {
     form.reset();
     Swal.fire({ title: msj, icon: 'success' });
 };
+
 </script>
 
 <template>
@@ -136,14 +135,9 @@ const ok = (msj) => {
                   <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
 
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
-                  <Textarea id="observaciones" v-model="form.observaciones" required
+                  <Textarea id="observaciones" v-model="form.observaciones" 
                   type="text" class="mt-1 block w-full"></Textarea>
                   <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
-
-                  <InputLabel for="img" value="IMAGENES" class="text-center"></InputLabel>
-                  <FileInput id="img"  required
-                  type="file" class="mt-1 block w-full"></FileInput>
-                  <InputError :message="form.errors.img" class="mt-2"></InputError>
 
                   <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"

@@ -116,9 +116,7 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">
-                        <img class="w-8 h-8 rounded-full" :src="'../../../../storage/app/public/posts/' + mac.img" alt="Imagen" /></td>
-                       
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.img }}</td>
                         <td class="border border-gray-400 px-2 py-2">
                             <Link :href="route('maceradoras.edit',mac)"
                             :class="'px-4 py-2 bg-yellow-400 text-white border rounded-md font-semibold text-xs'">
