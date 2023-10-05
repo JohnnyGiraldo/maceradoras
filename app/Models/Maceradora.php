@@ -19,10 +19,7 @@ class Maceradora extends Model
         'serial','modelo','estado','fechaFabricacion','tipoAsistencia',
         'fechaInstalacion','tipoMantenimiento','fechaMantenimiento',
         'tipoPieza','fechaCambioPieza','numeroCiclos','fechaIncidente',
-        'observaciones','img','cliente_id'
+        'observaciones','cliente_id'
     ];
-    
-
-    // Resto de las propiedades y relaciones del modelo...
 }
 

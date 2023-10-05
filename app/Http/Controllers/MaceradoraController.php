@@ -74,7 +74,6 @@ class MaceradoraController extends Controller
     }
     public function update(Request $request, Maceradora $maceradora)
     {
-        dd($request->validated());
         $request->validate([
         'serial' => 'required|max:150',
         'modelo' => 'required|max:150',

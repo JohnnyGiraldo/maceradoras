@@ -26,7 +26,6 @@ return new class extends Migration
             $table->integer('numeroCiclos')->unsigned(); 
             $table->date('fechaIncidente');
             $table->text('observaciones')->nullable();
-            $table->string('img')->nullable();
             
             $table->foreignId('cliente_id')
             ->constrained('clientes')

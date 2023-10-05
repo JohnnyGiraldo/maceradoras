@@ -135,11 +135,10 @@ const ok = (msj) => {
                   <InputError :message="form.errors.fechaIncidente" class="mt-2"></InputError>
 
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
-                  <Textarea id="observaciones" v-model="form.observaciones" 
-                  type="text" class="mt-1 block w-full"></Textarea>
-                  <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
+                  <textarea  id="observaciones" v-model="form.observaciones" 
+                  type="text" class="mt-1 block w-full"></textarea >
 
-                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
+                  <InputLabel for="cliente_id" value="CLIENTE:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"
                    v-model="form.cliente_id" type="text" class="mt-1 block w-full"
                   ></SelectInput>

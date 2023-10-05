@@ -30,7 +30,6 @@ const form = useForm({
             numeroCiclos :'',
             fechaIncidente:'',
             observaciones:'',
-            img:'',
             cliente:''           
 });
 const ok = (msj) => {
@@ -95,7 +94,6 @@ const deleteMaceradora = (serial) => {
                             <th class="px-2 py-2">Num Ciclos</th>
                             <th class="px-2 py-2">Fecha Incidente</th>
                             <th class="px-2 py-2">observaciones</th>
-                            <th class="px-2 py-2">Imagen</th>
                             <th class="px-2 py-2">Editar</th>
                             <th class="px-2 py-2">Eliminar</th>
                         </tr>
@@ -115,9 +113,8 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaCambioPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.img }}</td>
-                        <td class="border border-gray-400 px-2 py-2">
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones ? mac.observaciones.slice(0, 10) : '' }}</td>
+                        <td class="border border-gray-400 px-4 py-4">
                             <Link :href="route('maceradoras.edit',mac)"
                             :class="'px-4 py-2 bg-yellow-400 text-white border rounded-md font-semibold text-xs'">
                             <i class="fa-solid fa-edit"></i>

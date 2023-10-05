@@ -43,7 +43,6 @@ columns1.value= [{data:null,render:function(data,type,row,meta)
     { data: 'numeroCiclos' },
     { data: 'fechaIncidente' },
     { data: 'observaciones' },
-    { data: 'img' },
     { data: 'institucion'},
 ]
 columns2.value= [{data:null,render:function(data,type,row,meta)
@@ -141,7 +140,6 @@ buttons2.value= [
                                 <th class="px-2 py-2">Número de Ciclos</th>
                                 <th class="px-2 py-2">Fecha de Incidente</th>
                                 <th class="px-2 py-2">Observaciones</th>
-                                <th class="px-2 py-2">Imagen</th>
                                 <th class="px-2 py-2">Institucion</th>
                         </tr>
                     </thead>

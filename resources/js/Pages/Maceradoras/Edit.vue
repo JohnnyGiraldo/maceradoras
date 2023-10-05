@@ -4,7 +4,6 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SelectInput from '@/Components/SelectInput.vue';
-import FileInput from '@/Components/FileInput.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
@@ -138,7 +137,7 @@ const form = useForm({
                   <SelectInput id="cliente_id" :options="clientes"
                    v-model="form.cliente_id" type="text" class="mt-1 block w-full"
                   ></SelectInput>
-                  <InputError :message="form.errors.cliente_id" class="mt-2"></InputError>
+           
                 </div>
               </div>  
               <div class="col-span-3 text-center mt-2">
