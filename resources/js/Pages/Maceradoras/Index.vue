@@ -57,6 +57,15 @@ const deleteMaceradora = (serial) => {
   });
 }
 
+const showMaintenanceNotification = (maceradora) => {
+    Swal.fire({
+        title: 'Mantenimiento programado',
+        text: `La maceradora con serial ${maceradora.serial} necesita mantenimiento.`,
+        icon: 'info',
+        confirmButtonText: 'Entendido',
+    });
+};
+
 </script>
 
 <template>
@@ -66,7 +75,8 @@ const deleteMaceradora = (serial) => {
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Maceradoras</h2>
         </template>
-
+        <br><br><br>
+        
         <div class="py-12">
             <div class="bg-custom-teal grid v-screen place-items-center">
                 <div class="mt-3 mb-3 flex">

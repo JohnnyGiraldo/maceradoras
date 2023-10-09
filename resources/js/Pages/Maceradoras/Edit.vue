@@ -131,7 +131,7 @@ const form = useForm({
                   <InputLabel for="observaciones" value="OBSERVACIONES" class="text-center"></InputLabel>
                   <textarea  id="observaciones" v-model="form.observaciones"
                   type="text" class="mt-1 block w-full"></textarea>
-                  <InputError :message="form.errors.observaciones" class="mt-2"></InputError>
+
 
                  <InputLabel for="cliente_id" value="cliente:" class="text-center"></InputLabel>
                   <SelectInput id="cliente_id" :options="clientes"
