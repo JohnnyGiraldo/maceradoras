@@ -56,26 +56,58 @@ const deleteMaceradora = (serial) => {
     }
   });
 }
-
-const showMaintenanceNotification = (maceradora) => {
-    Swal.fire({
-        title: 'Mantenimiento programado',
-        text: `La maceradora con serial ${maceradora.serial} necesita mantenimiento.`,
-        icon: 'info',
-        confirmButtonText: 'Entendido',
-    });
-};
-
 </script>
+<style scoped>
+.notification-container-right {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Cambia la posición a la derecha */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.notification-icon {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.notification-count {
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* Estilos para el contador cuando hay notificaciones pendientes (rojo) */
+.red {
+    background-color: red;
+    color: white;
+}
+
+/* Estilos para el contador cuando no hay notificaciones (verde) */
+.green {
+    background-color: green;
+    color: white;
+}
+</style>
 
 <template>
     <Head title="Maceradoras" />
+
+    <div class="notification-container-right">
+        <!-- Icono de campana -->
+        <i class="fa-solid fa-bell notification-icon"></i>
+        <!-- Contador de notificaciones -->
+        <span :class="['notification-count', notificationCount > 0 ? 'red' : 'green']">{{ notificationCount === 0 ? '0' : notificationCount }}</span>
+    </div>
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Maceradoras</h2>
         </template>
         <br><br><br>
+
+        
         
         <div class="py-12">
             <div class="bg-custom-teal grid v-screen place-items-center">

@@ -28,6 +28,21 @@ const buttons2 = ref([]);
 const report = ref('1');
 const typesp = [{'id':'1','name':"Maceradoras"},{'id':'2','name':"Clientes"}];
 
+columns1.value = [
+    // ... otras columnas ...
+    {
+        data: 'observaciones',
+        render: function (data, type, row) {
+            if (type === 'display') {
+                return data.substring(0, 10);
+            }
+            return data;
+        },
+    },
+    // ... otras columnas ...
+];
+
+
 columns1.value= [{data:null,render:function(data,type,row,meta)
     {return (meta.row + 1)}},
     { data: 'serial' },
@@ -42,7 +57,7 @@ columns1.value= [{data:null,render:function(data,type,row,meta)
     { data: 'fechaCambioPieza' },
     { data: 'numeroCiclos' },
     { data: 'fechaIncidente' },
-    { data: 'observaciones' },
+    { data: 'observaciones'},
     { data: 'institucion'},
 ]
 columns2.value= [{data:null,render:function(data,type,row,meta)
