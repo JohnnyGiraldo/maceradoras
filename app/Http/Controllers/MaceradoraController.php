@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
-
+use App\Console\Commands\TestTask;
 
 class MaceradoraController extends Controller
 {
@@ -26,6 +25,8 @@ class MaceradoraController extends Controller
 
         $clientesArray = Cliente::all();
 
+        $lista=TestTask::handle();
+
         $clientes = $clientesArray->map(function ($cliente) {
             return [
                 'id' => $cliente->id,
@@ -34,7 +35,7 @@ class MaceradoraController extends Controller
         })->all();
 
         return Inertia::render('Maceradoras/Index',['maceradoras' => $maceradoras,
-        'clientes' => $clientes]);
+        'clientes' => $clientes,'lista'=>$lista]);
     }
     public function store(Request $request)
     {
