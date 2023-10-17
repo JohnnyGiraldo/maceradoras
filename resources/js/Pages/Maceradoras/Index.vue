@@ -281,5 +281,3 @@ const deleteMaceradora = (serial) => {
         </div>
     </AuthenticatedLayout>
 </template>
-
-
