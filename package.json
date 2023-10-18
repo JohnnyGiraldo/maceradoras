@@ -30,6 +30,8 @@
         "pdfmake": "^0.2.7",
         "sweetalert2": "^11.7.23",
         "vue-chartjs": "^5.2.0",
-        "vue-number-input": "^1.0.8"
+        "vue-draggable-next": "^2.2.1",
+        "vue-number-input": "^1.0.8",
+        "vuedraggable": "^2.24.3"
     }
 }

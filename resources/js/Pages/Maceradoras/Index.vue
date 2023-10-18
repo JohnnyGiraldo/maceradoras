@@ -5,7 +5,8 @@ import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
 import { ref } from 'vue';
-// como importo un archivo php en vue 3 
+
+
 const open = ref(false)
 
 
@@ -95,8 +96,8 @@ const deleteMaceradora = (serial) => {
 }
 .modal {
     position: fixed;
-    top: 20%; /* Centra verticalmente en la mitad de la pantalla */
-    left: 17%; /* Centra horizontalmente en la mitad de la pantalla */
+    top: 50%; /* Centra verticalmente en la mitad de la pantalla */
+    left: 80%; /* Centra horizontalmente en la mitad de la pantalla */
     transform: translate(-50%, -50%); /* Centra exactamente en el centro */
     background-color: #39748B; 
     width: 35%; /* Tamaño del modal en relación al ancho de la pantalla */
@@ -106,14 +107,16 @@ const deleteMaceradora = (serial) => {
     align-items: center; /* Centrar contenido horizontalmente */
     z-index: 1;
     border-radius: 5%;
+ 
 }
 /* Estilo para el contenido del modal */
 .modal-content {
-    background-color: #39748B;
+    background-color: #ebeeef;
     padding: 20px;
     margin: -22px; /* Espacio interno del modal */
     text-align: center;
     width: 100%; /* Ocupa todo el ancho del modal */
+    border-radius: 5%;
 }
 /* Estilo para el botón de cerrar */
 .modal-button[data-v-e529c56f] {
@@ -160,8 +163,8 @@ const deleteMaceradora = (serial) => {
 </style>
 
 <template>
-    <Head title="Maceradoras" />
 
+    <Head title="Maceradoras" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Maceradoras</h2>
@@ -180,10 +183,10 @@ const deleteMaceradora = (serial) => {
   <teleport to="body">
     <div v-if="open" class="modal">
       <div class="modal-content">
-        <p>Maceradoras para Mantenimiento</p>
+        <h1>Maceradoras para Mantenimiento</h1>
         <!-- Contenido de notificaciones aquí -->
-        <table>
-          <thead>
+        <table style="border: black 1px solid">
+          <thead style="border: black 1px solid">
             <tr>
               <th>Serial</th>
               <th>Meses sin mantenimiento</th>
@@ -191,8 +194,8 @@ const deleteMaceradora = (serial) => {
               <th>Institución</th>
             </tr>
           </thead>
-          <tbody>
-            <tr v-for="element in lista" :key="element.serial">
+          <tbody style="border: #b2b2b2 1px solid">
+            <tr v-for="element in lista" :key="element.serial" style="border: black 1px solid">
               <td>{{ element.serial }}</td>
               <td>{{ element.mesesSinMantenimiento }}</td>
               <td>{{ element.modelo }}</td>
