@@ -4,11 +4,16 @@ import DangerButton from '@/Components/DangerButton.vue';
 import { Head,Link,useForm } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 import VueTailwindPagination from '@ocrv/vue-tailwind-pagination';
+import { ref } from 'vue';
+
+
+const open = ref(false)
 
 
 const props = defineProps({
     maceradoras: {type:Object},
-    clientes: {type:Object}
+    clientes: {type:Object},
+    lista: {type:Object}
 });
 
 const formPage = useForm({});
@@ -30,7 +35,6 @@ const form = useForm({
             numeroCiclos :'',
             fechaIncidente:'',
             observaciones:'',
-            img:'',
             cliente:''           
 });
 const ok = (msj) => {
@@ -56,18 +60,158 @@ const deleteMaceradora = (serial) => {
       });
     }
   });
-}
+
+};
 
 </script>
 
-<template>
-    <Head title="Maceradoras" />
+<style scoped>
+.notification-container-right {
+    position: absolute;
+    top: 20px;
+    right: 20px; /* Cambia la posición a la derecha */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.notification-icon {
+    font-size: 24px;
+    margin-right: 5px;
+}
+.notification-count {
+    border-radius: 50%;
+    padding: 5px 10px;
+    padding: 9px 10px;
+    font-size: 14px;
+}
+/* Estilos para el contador cuando hay notificaciones pendientes (rojo) */
+.red {
+    background-color: red;
+    color: white;
+}
+/* Estilos para el contador cuando no hay notificaciones (verde) */
+.green {
+    background-color: green;
+    color: white;
+}
+.modal {
+    position: fixed;
+    top: 50%; /* Centra verticalmente en la mitad de la pantalla */
+    left: 80%; /* Centra horizontalmente en la mitad de la pantalla */
+    transform: translate(-50%, -50%); /* Centra exactamente en el centro */
+    background-color: #39748B; 
+    width: 35%; /* Tamaño del modal en relación al ancho de la pantalla */
+    display: flex;
+    flex-direction: column; /* Organizar contenido en columna */
+    justify-content: space-between; /* Espacio entre contenido y botón de cierre */
+    align-items: center; /* Centrar contenido horizontalmente */
+    z-index: 1;
+    border-radius: 5%;
+ 
+}
+/* Estilo para el contenido del modal */
+.modal-content {
+    background-color: #ebeeef;
+    padding: 20px;
+    margin: -22px; /* Espacio interno del modal */
+    text-align: center;
+    width: 100%; /* Ocupa todo el ancho del modal */
+    border-radius: 5%;
+}
+/* Estilo para el botón de cerrar */
+.modal-button[data-v-e529c56f] {
+    background-color: rgb(10, 10, 10);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+/* Estilo para el botón de cerrar */
+.modal-button {
+    background-color: gray;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    /* Otros estilos según sea necesario */
+}
+.black-button {
+    background-color: black;
+    color: white;
+    border-radius: 10px; /* Ajusta el valor del border-radius según lo que desees */
+    padding: 10px 20px; /* Ajusta el espaciado interior según lo que desees */
+    border: none; /* Elimina el borde */
+    cursor: pointer;
+    /* Otros estilos según sea necesario */
+}
+/* Estilo cuando el botón está en estado de hover (opcional) */
+.black-button:hover {
+    background-color: #64ce0e; /* Cambia el color de fondo cuando se pasa el mouse */
+}
+.notification-container-right[data-v-e529c56f] {
+    position: absolute;
+    top: 171px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+</style>
 
+<template>
+
+    <Head title="Maceradoras" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Maceradoras</h2>
         </template>
+        <br><br><br>
 
+        <div class="notification-container-right">
+  <!-- Icono de campana -->
+  <i class="fa-solid fa-bell notification-icon"></i>
+  <!-- Contador de notificaciones -->
+  
+  <span :class="['notification-count', Object.keys(lista).length > 0 ? 'red' : 'green']">{{ Object.keys(lista).length === 0 ? '0' : Object.keys(lista).length }}</span>
+
+  <button @click="open = true" class="px-4 py-2 bg-gray-800 text-white border rounded-md font-semibold text-xs">Open Modal</button>
+
+  <teleport to="body">
+    <div v-if="open" class="modal">
+      <div class="modal-content">
+        <h1>Maceradoras para Mantenimiento</h1>
+        <!-- Contenido de notificaciones aquí -->
+        <table style="border: black 1px solid">
+          <thead style="border: black 1px solid">
+            <tr>
+              <th>Serial</th>
+              <th>Meses sin mantenimiento</th>
+              <th>Modelo</th>
+              <th>Institución</th>
+            </tr>
+          </thead>
+          <tbody style="border: #b2b2b2 1px solid">
+            <tr v-for="element in lista" :key="element.serial" style="border: black 1px solid">
+              <td>{{ element.serial }}</td>
+              <td>{{ element.mesesSinMantenimiento }}</td>
+              <td>{{ element.modelo }}</td>
+              <td>{{ element.institucion }}</td>
+              
+            </tr>
+          </tbody>
+        </table>
+        <button @click="open = false" class="modal-button">Close</button>
+      </div>
+    </div>
+  </teleport>
+</div>
+
+
+        
         <div class="py-12">
             <div class="bg-custom-teal grid v-screen place-items-center">
                 <div class="mt-3 mb-3 flex">
@@ -95,7 +239,6 @@ const deleteMaceradora = (serial) => {
                             <th class="px-2 py-2">Num Ciclos</th>
                             <th class="px-2 py-2">Fecha Incidente</th>
                             <th class="px-2 py-2">observaciones</th>
-                            <th class="px-2 py-2">Imagen</th>
                             <th class="px-2 py-2">Editar</th>
                             <th class="px-2 py-2">Eliminar</th>
                         </tr>
@@ -115,11 +258,8 @@ const deleteMaceradora = (serial) => {
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaCambioPieza }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.numeroCiclos }}</td>
                         <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.fechaIncidente }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones }}</td>
-                        <td class="border border-gray-400 px-2 py-2 text-center">
-                        <img class="w-8 h-8 rounded-full" :src="'../../../../storage/app/public/posts/' + mac.img" alt="Imagen" /></td>
-                       
-                        <td class="border border-gray-400 px-2 py-2">
+                        <td class="border border-gray-400 px-2 py-2 text-center">{{ mac.observaciones ? mac.observaciones.slice(0, 10) : '' }}</td>
+                        <td class="border border-gray-400 px-4 py-4">
                             <Link :href="route('maceradoras.edit',mac)"
                             :class="'px-4 py-2 bg-yellow-400 text-white border rounded-md font-semibold text-xs'">
                             <i class="fa-solid fa-edit"></i>
@@ -144,5 +284,3 @@ const deleteMaceradora = (serial) => {
         </div>
     </AuthenticatedLayout>
 </template>
-
-

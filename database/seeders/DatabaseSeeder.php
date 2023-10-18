@@ -13,10 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Storage::deleteDirectory('posts');// Elimina tambien las imagenes de la carpeta 
-        Storage::makeDirectory('posts');// Crea la Carpeta con las migraciones 
-
-
         \App\Models\Cliente::factory(5)->create();
         \App\Models\Maceradora::factory(25)->create();
     }
